@@ -31,14 +31,15 @@ document.getElementById("auth_register_form")
         (res=>res.text())
         .then
         (res=>{
-            console.log(res);
             if(res=="Username already exists") {
                 errorAlert("Bunday login-ga ega hisob mavjud");
             } else if(res!="Username already exists") {
                 let authProfileObj = JSON.parse(res);
                 localStorage.setItem("accessToken",authProfileObj["access_token"]);
                 successAlert("Ro'yxatdan o'tish muvaffaqiyatli.");
-                window.location.href = location.origin;
+                setTimeout(()=>{                
+                    window.location.href = location.origin;
+                },2000)
             }
         })
         .catch(err=>{

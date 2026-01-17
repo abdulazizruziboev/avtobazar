@@ -1,4 +1,4 @@
-let apiLimit=1;
+let apiLimit=10;
 let apiSkip=0;
 
 function skeletonUI (bool=true,limit=10) {
@@ -57,6 +57,12 @@ function cardWrite(response,total) {
                 infoAlert("Istaklar bo'limiga qo'shildi!");
             } else {
                 infoAlert("Iltimos birinchi tizimga kiring!");
+                document.querySelector(".js-login-btn").hidden=false;
+                document.querySelector(".js-auth-managment ").hidden=true;
+                AuthChecker();
+                setTimeout(()=>{
+                    window.location.href=window.origin+`/account/login/index.html`;
+                },5000)
             }
         })
     })
@@ -133,10 +139,17 @@ function infoAlert(text="Yuklanmoqda...") {
 }
 
 /* Auth checker */
+AuthChecker()
+function AuthChecker() {
 if(isLogined()==true) {
     document.querySelector(".js-login-btn").hidden=true;
     document.querySelector(".js-auth-managment ").hidden=false;
+    document.getElementById("main_box_container").classList.remove("mb-[0px]");
+    document.getElementById("main_box_container").classList.add("mb-[50px]");
 } else {
     document.querySelector(".js-login-btn").hidden=false;
     document.querySelector(".js-auth-managment ").hidden=true;
+    document.getElementById("main_box_container").classList.remove("mb-[50px]");
+    document.getElementById("main_box_container").classList.add("mb-[0px]");
+}
 }
