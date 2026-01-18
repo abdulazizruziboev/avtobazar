@@ -57,7 +57,7 @@ function cardWrite(data) {
         document.querySelector(".js-more-loader").classList.remove("hidden");
         document.querySelector(".js-more-loader").classList.add("flex");
         setTimeout(()=>{
-        document.querySelector(".js-more-loader").classList.remove("opacity-[0");
+        document.querySelector(".js-more-loader").classList.remove("opacity-[0]");
         document.querySelector(".js-more-loader").classList.add("opacity-[1]");
         },1200)
     }));
@@ -171,6 +171,8 @@ if(isLogined()==true) {
     document.querySelector(".js-auth-managment ").hidden=true;
     document.getElementById("main_box_container").classList.remove("mb-[50px]","sm:mb-[65px]");
     document.getElementById("main_box_container").classList.add("mb-[0px]","sm:mb-[0px]");
+    window.location.href=location.origin+'/account/login/index.html';
+    localStorage.removeItem("accessToken");
 }
 }
 
@@ -219,3 +221,28 @@ function successAlert(text="Muvaffaqiyatli!") {
     },7000)
 }
 
+function mainpulationFavorites(id) {
+    if(localStorage.getItem("favorites_list")) {
+        let old_list=JSON.parse(localStorage.getItem("favorites_list"));
+        let old_uniqe_list = new Set(old_list);
+        let new_list = Array.from(old_uniqe_list);
+        new_list.push(Number(id));
+        let new_uniqe_list = new Set(new_list);
+        localStorage.setItem("favorites_list",JSON.stringify(Array.from(new_uniqe_list)));
+        successAlert("Istaklar ro'yxatiga qo'shildi!");
+        document.querySelector(`[data-favorite-id='${id}']`).setAttribute("data-tip","Istaklardan o'chirish");
+        document.querySelector(`[data-favorite-id='${id}']`).innerHTML=
+        `<svg class="pointer-events-none" width="22" height="22" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.35248 4.90532C1.35248 2.94498 2.936 1.35248 4.89346 1.35248C6.25769 1.35248 6.86058 1.92336 7.50002 2.93545C8.13946 1.92336 8.74235 1.35248 10.1066 1.35248C12.064 1.35248 13.6476 2.94498 13.6476 4.90532C13.6476 6.74041 12.6013 8.50508 11.4008 9.96927C10.2636 11.3562 8.92194 12.5508 8.00601 13.3664C7.94645 13.4194 7.88869 13.4709 7.83291 13.5206C7.64324 13.6899 7.3568 13.6899 7.16713 13.5206C7.11135 13.4709 7.05359 13.4194 6.99403 13.3664C6.0781 12.5508 4.73641 11.3562 3.59926 9.96927C2.39872 8.50508 1.35248 6.74041 1.35248 4.90532Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>`;
+        document.querySelector(`[data-favorite-id='${id}']`).classList.remove("favorited_false");
+        document.querySelector(`[data-favorite-id='${id}']`).classList.add("favorited_true");
+    } else {
+        let x = [];x.push(Number(id));
+        localStorage.setItem("favorites_list",JSON.stringify(x));
+        successAlert("Istaklar ro'yxatiga qo'shildi!");
+        document.querySelector(`[data-favorite-id='${id}']`).setAttribute("data-tip","Istaklardan o'chirish");
+        document.querySelector(`[data-favorite-id='${id}']`).innerHTML=
+        `<svg class="pointer-events-none" width="22" height="22" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.35248 4.90532C1.35248 2.94498 2.936 1.35248 4.89346 1.35248C6.25769 1.35248 6.86058 1.92336 7.50002 2.93545C8.13946 1.92336 8.74235 1.35248 10.1066 1.35248C12.064 1.35248 13.6476 2.94498 13.6476 4.90532C13.6476 6.74041 12.6013 8.50508 11.4008 9.96927C10.2636 11.3562 8.92194 12.5508 8.00601 13.3664C7.94645 13.4194 7.88869 13.4709 7.83291 13.5206C7.64324 13.6899 7.3568 13.6899 7.16713 13.5206C7.11135 13.4709 7.05359 13.4194 6.99403 13.3664C6.0781 12.5508 4.73641 11.3562 3.59926 9.96927C2.39872 8.50508 1.35248 6.74041 1.35248 4.90532Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>`;
+        document.querySelector(`[data-favorite-id='${id}']`).classList.remove("favorited_false");
+        document.querySelector(`[data-favorite-id='${id}']`).classList.add("favorited_true");
+    }
+};

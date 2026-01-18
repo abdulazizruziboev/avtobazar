@@ -63,7 +63,7 @@ function cardWrite(response,total) {
         document.querySelector(".js-more-loader").classList.remove("hidden");
         document.querySelector(".js-more-loader").classList.add("flex");
         setTimeout(()=>{
-        document.querySelector(".js-more-loader").classList.remove("opacity-[0");
+        document.querySelector(".js-more-loader").classList.remove("opacity-[0]");
         document.querySelector(".js-more-loader").classList.add("opacity-[1]");
         },1200)
     }));
