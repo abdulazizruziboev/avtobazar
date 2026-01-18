@@ -18,11 +18,16 @@ function skeletonUI (bool=true,limit=10) {
 mainRequest();
 function mainRequest() {
 skeletonUI(true,apiLimit);
-fetch(`https://json-api.uz/api/project/fn44-amaliyot/cars?limit=${apiLimit}&skip=${apiSkip}`)
-.then(res=>res.json())
+fetch(`https://json-api.uz/api/project/fn44-amaliyot/cars`)
+.then(res=>res.text())
 .then(res=>{
-    skeletonUI(false,0);
-    cardWrite(res.data,res.total)
+    if(res!="Iltimos domainlar ro'yxatiga ushbu manzilni qo'shing") {
+        let resParsed = JSON.parse(res);
+        skeletonUI(false,0);
+        cardWrite(resParsed.data,resParsed.total);
+    } else if(res=="Iltimos domainlar ro'yxatiga ushbu manzilni qo'shing") {
+        console.log("Serverda xatolik bo'ldi");
+    }
 })
 
 function cardWrite(response,total) {
