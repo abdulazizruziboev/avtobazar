@@ -27,6 +27,8 @@ fetch(`https://json-api.uz/api/project/fn44-amaliyot/cars`)
         cardWrite(resParsed.data,resParsed.total);
     } else if(res=="Iltimos domainlar ro'yxatiga ushbu manzilni qo'shing") {
         console.log("Serverda xatolik bo'ldi");
+        document.querySelector(".js-api-error").classList.remove("hidden");
+        document.querySelector(".js-api-error").classList.add("flex");
     }
 })
 

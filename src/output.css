@@ -13,6 +13,7 @@
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
+    --font-weight-bold: 700;
     --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
     --blur-sm: 8px;
     --default-transition-duration: 150ms;
@@ -1492,6 +1493,9 @@
   .z-\[4\] {
     z-index: 4;
   }
+  .z-\[9999999999999\] {
+    z-index: 9999999999999;
+  }
   .col-span-full {
     grid-column: 1 / -1;
   }
@@ -1901,6 +1905,9 @@
   .gap-3 {
     gap: calc(var(--spacing) * 3);
   }
+  .gap-10 {
+    gap: calc(var(--spacing) * 10);
+  }
   .gap-\[2px\] {
     gap: 2px;
   }
@@ -2088,6 +2095,9 @@
   .pl-3 {
     padding-left: calc(var(--spacing) * 3);
   }
+  .text-center {
+    text-align: center;
+  }
   .font-\[\'Inter\'\] {
     font-family: 'Inter';
   }
@@ -2115,6 +2125,9 @@
   .text-\[60px\] {
     font-size: 60px;
   }
+  .text-\[80px\] {
+    font-size: 80px;
+  }
   .leading-none {
     --tw-leading: 1;
     line-height: 1;
@@ -2130,6 +2143,10 @@
   .font-\[660\] {
     --tw-font-weight: 660;
     font-weight: 660;
+  }
+  .font-bold {
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
   }
   .text-wrap {
     text-wrap: wrap;
@@ -2293,6 +2310,10 @@
   .outline-none {
     --tw-outline-style: none;
     outline-style: none;
+  }
+  .select-none {
+    -webkit-user-select: none;
+    user-select: none;
   }
   .focus-within\:border-\[\#00bf83\] {
     &:focus-within {
