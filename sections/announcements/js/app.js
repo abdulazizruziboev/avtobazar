@@ -36,8 +36,8 @@ function announcementsListChecker() {
             document.getElementById("announcements_empty_info").classList.add("flex");
         }
     } else {
-        document.getElementById("announcements_empty_info").classList.remove("flex");
-        document.getElementById("announcements_empty_info").classList.add("hidden");
+        document.getElementById("announcements_empty_info").classList.remove("hidden");
+        document.getElementById("announcements_empty_info").classList.add("flex");
     }
 };
 
