@@ -1,0 +1,24 @@
+html:root {
+    --ra-1: #dadada;
+    --ra-bw-1: #000;
+}
+ html.dark:root {
+    --ra-1: rgb(100, 100, 100);
+    --ra-bw-1: #fff;
+}
+
+.border-ra-1 {
+    border-color: var(--ra-1);
+}
+
+.ra-border-success {
+    border-color: #00d390;
+}
+
+.dark\:ra-text-bw {
+    color: var(--ra-black);
+}
+ 
+html.dark .dark\:bg-\[\#383838\] {
+    background: #383838; 
+}
