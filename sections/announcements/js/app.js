@@ -11,6 +11,7 @@ function removeAnnouncements(id) {
 }
 announcementsListChecker();
 function announcementsListChecker() {
+    document.querySelector(".js-cards-main-box").innerHTML="";
     if(localStorage.getItem("announcements_list")) {
         let arr = JSON.parse(localStorage.getItem("announcements_list"));
         if(arr.length!=0) {
@@ -35,13 +36,14 @@ function announcementsListChecker() {
             document.getElementById("announcements_empty_info").classList.add("flex");
         }
     } else {
-        document.getElementById("announcements_empty_info").classList.remove("hidden");
-        document.getElementById("announcements_empty_info").classList.add("flex");
+        document.getElementById("announcements_empty_info").classList.remove("flex");
+        document.getElementById("announcements_empty_info").classList.add("hidden");
     }
 };
 
 function cardWrite(data) {
     skeletonUI(false);
+    document.querySelector(".js-cards-main-box").innerHTML="";
     data.forEach(el=>{
         let clone=document.getElementById("car_card_template").cloneNode(true).content;
         clone.querySelector(`[data-txt="name"]`).textContent=el.name?el.name:"No data";
@@ -323,7 +325,7 @@ function warningAlert(text="Nosozlik!") {
 }
 
 function errorAlert(text="Xatolik..!") {
-    let clone = document.querySelector(".js-warning-alert-template").cloneNode(true).content;
+    let clone = document.querySelector(".js-error-alert-template").cloneNode(true).content;
     clone.querySelector("span").textContent=text;
     document.querySelector(".js-alert-wrapper-box").appendChild(clone);
     setTimeout(()=>{
@@ -416,6 +418,8 @@ document.getElementById("addAnnouncementForm").addEventListener("submit",(evt)=>
                     },7000)
                 } else {
                     successAlert("Muvaffaqiyatli. E`lon berildi!");
+                    document.getElementById("announcements_empty_info").classList.remove("flex");
+                    document.getElementById("announcements_empty_info").classList.add("hidden");
                     document.getElementById("addAnnouncementForm").querySelector("button").disabled=false;
                     document.querySelector(".js-add-loader").classList.remove("opacity-[1]");
                     document.querySelector(".js-add-loader").classList.add("opacity-[0]");
@@ -511,8 +515,6 @@ document.querySelector(".js-edit-announcement-modal").classList.remove("opacity-
 document.querySelector(".js-edit-announcement-modal").classList.add("opacity-[1]");
 },500)
 }
-};
-
 document.getElementById("editAnnouncementForm").addEventListener("submit",(evt)=>
 {
     evt.preventDefault();
@@ -572,7 +574,7 @@ document.getElementById("editAnnouncementForm").addEventListener("submit",(evt)=
             description: addFormData.get("description").trim()
         };
         fetch(
-            "https://json-api.uz/api/project/fn44-amaliyot/cars/",
+            `https://json-api.uz/api/project/fn44-amaliyot/cars/${id}`,
             {
                 method:"PATCH",
                 headers: {
@@ -608,6 +610,8 @@ document.getElementById("editAnnouncementForm").addEventListener("submit",(evt)=
     }
 })
 
+};
+
 function deleteAnnouncements(id) {
     setTimeout(()=>{
         document.querySelector(".js-delete-loader").classList.remove("opacity-[0]");
@@ -638,7 +642,35 @@ function deleteAnnouncements(id) {
         setTimeout(()=>removeAnnouncements(id),2200);
         setTimeout(()=>successAlert("Muvaffaqiyatli. E`lon o'chirildi."),2500);
         setTimeout(()=>announcementsListChecker(),3000);
-       }
+       } else if(res=="Resource not found") {
+        setTimeout(()=>{
+            document.querySelector(".js-delete-loader").classList.remove("opacity-[1]");
+            document.querySelector(".js-delete-loader").classList.add("opacity-[0]");
+       },1200)
+       setTimeout(()=>{
+       document.querySelector(".js-delete-loader").classList.add("hidden");
+       document.querySelector(".js-delete-loader").classList.remove("flex");
+       },1600)
+        setTimeout(()=>removeAnnouncements(id),2200);
+        setTimeout(()=>errorAlert("Tizimda xatolik yuz berdi"),2500);
+
+        setTimeout(()=>announcementsListChecker(),3000);
+       } else if(res=="Token expired!") {
+       setTimeout(()=>{
+            document.querySelector(".js-delete-loader").classList.remove("opacity-[1]");
+            document.querySelector(".js-delete-loader").classList.add("opacity-[0]");
+       },1200)
+       setTimeout(()=>{
+       document.querySelector(".js-delete-loader").classList.add("hidden");
+       document.querySelector(".js-delete-loader").classList.remove("flex");
+       },1600)
+        infoAlert("Iltimos qayta tizimga kiring!");
+        setTimeout(()=>{
+        console.log(res);
+        window.location.href=location.origin+'/account/login/index.html';
+        localStorage.removeItem("accessToken");
+        },7000)
+        }
     })
     .catch(err=>{
     console.log("Xatolik: ",err);
