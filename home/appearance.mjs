@@ -30,3 +30,13 @@ document.querySelector(".js-theme-toggler").addEventListener("click",()=>{
         document.querySelector(".js-toggler-light-icon").style.display="none";
     }
 });
+
+setTimeout(()=>{
+    document.querySelector(".js-main-loader").classList.add("opacity-[0]");
+    document.querySelector(".js-main-loader").classList.add("translate-y-[-100%]");
+},3000)
+
+setTimeout(()=>{
+    document.querySelector(".js-main-loader").classList.remove("flex");
+    document.querySelector(".js-main-loader").classList.add("hidden");
+},5000)
