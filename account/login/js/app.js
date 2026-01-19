@@ -18,6 +18,7 @@ document.getElementById("auth_login_form")
             password: loginFormData.get("password").trim() 
         };
         infoAlert("So'rov yuborilmoqda...")
+        document.querySelector("#loginBtn").disabled=true;
         fetch("https://json-api.uz/api/project/fn44-amaliyot/auth/login",
             {
                 method:"POST",
@@ -33,6 +34,7 @@ document.getElementById("auth_login_form")
         (res=>{
             if(res=="User not found (check username and password)") {
                 errorAlert("Login yoki parol xato!");
+                document.querySelector("#loginBtn").disabled=false;
             } else if(res!="Username already exists") {
                 let authProfileObj = JSON.parse(res);
                 localStorage.setItem("accessToken",authProfileObj["access_token"]);
