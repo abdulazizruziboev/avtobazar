@@ -33,9 +33,9 @@ document.getElementById("auth_register_form")
         .then
         (res=>{
             if(res=="Username already exists") {
+                document.querySelector("#registerBtn").disabled=false;
                 errorAlert("Bunday login-ga ega hisob mavjud");
             } else if(res!="Username already exists") {        
-                document.querySelector("#registerBtn").disabled=false;
                 let authProfileObj = JSON.parse(res);
                 localStorage.setItem("accessToken",authProfileObj["access_token"]);
                 successAlert("Ro'yxatdan o'tish muvaffaqiyatli.");
