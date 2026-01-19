@@ -18,6 +18,7 @@ document.getElementById("auth_register_form")
             password: registerFormData.get("password").trim() 
         };
         infoAlert("So'rov yuborilmoqda...")
+        document.querySelector("#registerBtn").disabled=true;
         fetch("https://json-api.uz/api/project/fn44-amaliyot/auth/register",
             {
                 method:"POST",
@@ -33,7 +34,8 @@ document.getElementById("auth_register_form")
         (res=>{
             if(res=="Username already exists") {
                 errorAlert("Bunday login-ga ega hisob mavjud");
-            } else if(res!="Username already exists") {
+            } else if(res!="Username already exists") {        
+                document.querySelector("#registerBtn").disabled=false;
                 let authProfileObj = JSON.parse(res);
                 localStorage.setItem("accessToken",authProfileObj["access_token"]);
                 successAlert("Ro'yxatdan o'tish muvaffaqiyatli.");
