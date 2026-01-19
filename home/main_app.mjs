@@ -1,3 +1,19 @@
+/* Auth checker */
+AuthChecker()
+function AuthChecker() {
+if(isLogined()==true) {
+    document.querySelector(".js-auth-managment").classList.remove("hidden");
+    document.querySelector(".js-auth-managment").classList.add("flex");
+    document.getElementById("main_box_container").classList.remove("mb-[0px]","sm:mb-[0px]");
+    document.getElementById("main_box_container").classList.add("mb-[50px]","sm:mb-[65px]");
+} else {
+    document.querySelector(".js-login-btn").classList.remove("hidden");
+    document.querySelector(".js-login-btn").classList.add("flex");
+    document.getElementById("main_box_container").classList.remove("mb-[50px]","sm:mb-[65px]");
+    document.getElementById("main_box_container").classList.add("mb-[0px]","sm:mb-[0px]");
+}
+}
+
 let apiLimit=15;
 let apiSkip=0;
 
@@ -166,22 +182,6 @@ function isLogined() {
     }
 }
 
-
-/* Auth checker */
-AuthChecker()
-function AuthChecker() {
-if(isLogined()==true) {
-    document.querySelector(".js-login-btn").hidden=true;
-    document.querySelector(".js-auth-managment ").hidden=false;
-    document.getElementById("main_box_container").classList.remove("mb-[0px]","sm:mb-[0px]");
-    document.getElementById("main_box_container").classList.add("mb-[50px]","sm:mb-[65px]");
-} else {
-    document.querySelector(".js-login-btn").hidden=false;
-    document.querySelector(".js-auth-managment ").hidden=true;
-    document.getElementById("main_box_container").classList.remove("mb-[50px]","sm:mb-[65px]");
-    document.getElementById("main_box_container").classList.add("mb-[0px]","sm:mb-[0px]");
-}
-}
 
 /* Favorites Logic */
 
