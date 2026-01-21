@@ -17,7 +17,8 @@ document.getElementById("auth_register_form")
             username: registerFormData.get("username").trim(),
             password: registerFormData.get("password").trim() 
         };
-        infoAlert("So'rov yuborilmoqda...")
+        infoAlert("So'rov yuborilmoqda...");
+        animationReq(true);
         document.querySelector("#registerBtn").disabled=true;
         fetch("https://json-api.uz/api/project/fn44-amaliyot/auth/register",
             {
@@ -34,10 +35,13 @@ document.getElementById("auth_register_form")
         (res=>{
             if(res=="Username already exists") {
                 document.querySelector("#registerBtn").disabled=false;
+                animationReq(false);
                 errorAlert("Bunday login-ga ega hisob mavjud");
             } else if(res!="Username already exists") {        
                 let authProfileObj = JSON.parse(res);
                 localStorage.setItem("accessToken",authProfileObj["access_token"]);
+                localStorage.setItem("userProfile",res);
+                animationReq(false);
                 successAlert("Ro'yxatdan o'tish muvaffaqiyatli.");
                 setTimeout(()=>{                
                     window.location.href = location.origin;
@@ -96,4 +100,22 @@ function successAlert(text="Ro'yxatdan o'tish muvaffaqiyatli.") {
     setTimeout(()=>{
     document.querySelector(".js-alert-wrapper-box").querySelector("[role='alert']").remove();
     },7000)
+}
+
+function animationReq(bool){
+if(bool==true) {
+document.querySelector(".js-request-loader").classList.remove("hidden");
+document.querySelector(".js-request-loader").classList.add("flex");
+setTimeout(()=>{
+    document.querySelector(".js-request-loader").classList.remove("opacity-[0]");
+document.querySelector(".js-request-loader").classList.add("opacity-[1]");
+},1500)
+} else if(bool==false) {
+document.querySelector(".js-request-loader").classList.remove("flex");
+document.querySelector(".js-request-loader").classList.add("hidden");
+setTimeout(()=>{
+    document.querySelector(".js-request-loader").classList.remove("opacity-[1]");
+document.querySelector(".js-request-loader").classList.add("opacity-[0]");
+},1500)
+}
 }

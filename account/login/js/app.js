@@ -17,7 +17,8 @@ document.getElementById("auth_login_form")
             username: loginFormData.get("username").trim(),
             password: loginFormData.get("password").trim() 
         };
-        infoAlert("So'rov yuborilmoqda...")
+        infoAlert("So'rov yuborilmoqda...");
+        animationReq(true);
         document.querySelector("#loginBtn").disabled=true;
         fetch("https://json-api.uz/api/project/fn44-amaliyot/auth/login",
             {
@@ -33,15 +34,20 @@ document.getElementById("auth_login_form")
         .then
         (res=>{
             if(res=="User not found (check username and password)") {
+                animationReq(false);
                 errorAlert("Login yoki parol xato!");
                 document.querySelector("#loginBtn").disabled=false;
             } else if(res!="Username already exists") {
                 let authProfileObj = JSON.parse(res);
+                localStorage.setItem("userProfile",res);
                 localStorage.setItem("accessToken",authProfileObj["access_token"]);
+                animationReq(false);
+                setTimeout(()=>{
                 successAlert("Tizimga kirish muvaffaqiyatli.");
+                },2500)
                 setTimeout(()=>{                
                     window.location.href = location.origin;
-                },2000)
+                },5000)
             }
         })
         .catch(err=>{
@@ -96,4 +102,22 @@ function successAlert(text="Tizimga kirish muvaffaqiyatli.") {
     setTimeout(()=>{
     document.querySelector(".js-alert-wrapper-box").querySelector("[role='alert']").remove();
     },7000)
+}
+
+function animationReq(bool){
+if(bool==true) {
+document.querySelector(".js-request-loader").classList.remove("hidden");
+document.querySelector(".js-request-loader").classList.add("flex");
+setTimeout(()=>{
+    document.querySelector(".js-request-loader").classList.remove("opacity-[0]");
+document.querySelector(".js-request-loader").classList.add("opacity-[1]");
+},1500)
+} else if(bool==false) {
+document.querySelector(".js-request-loader").classList.remove("flex");
+document.querySelector(".js-request-loader").classList.add("hidden");
+setTimeout(()=>{
+    document.querySelector(".js-request-loader").classList.remove("opacity-[1]");
+document.querySelector(".js-request-loader").classList.add("opacity-[0]");
+},1500)
+}
 }

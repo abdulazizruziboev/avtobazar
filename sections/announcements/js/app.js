@@ -411,10 +411,10 @@ document.getElementById("addAnnouncementForm").addEventListener("submit",(evt)=>
             .then(res=>{
                 if(res=="Token expired!") {
                     infoAlert("Iltimos qayta tizimga kiring!");
+                    localStorage.removeItem("accessToken");
+                    localStorage.removeItem("userProfile");
                     setTimeout(()=>{
-                        console.log(res);
                         window.location.href=location.origin+'/account/login/index.html';
-                        localStorage.removeItem("accessToken");
                     },7000)
                 } else {
                     successAlert("Muvaffaqiyatli. E`lon berildi!");
@@ -588,9 +588,9 @@ document.getElementById("editAnnouncementForm").addEventListener("submit",(evt)=
                 if(res=="Token expired!") {
                     infoAlert("Iltimos qayta tizimga kiring!");
                     setTimeout(()=>{
-                        console.log(res);
-                        window.location.href=location.origin+'/account/login/index.html';
                         localStorage.removeItem("accessToken");
+                        localStorage.removeItem("userProfile");
+                        window.location.href=location.origin+'/account/login/index.html';
                     },7000)
                 } else {
                     document.getElementById("editAnnouncementForm").querySelector("button").disabled=false;
@@ -656,6 +656,8 @@ function deleteAnnouncements(id) {
 
         setTimeout(()=>announcementsListChecker(),3000);
        } else if(res=="Token expired!") {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("userProfile");
        setTimeout(()=>{
             document.querySelector(".js-delete-loader").classList.remove("opacity-[1]");
             document.querySelector(".js-delete-loader").classList.add("opacity-[0]");

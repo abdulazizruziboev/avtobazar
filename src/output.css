@@ -7,7 +7,6 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-red-500: oklch(63.7% 0.237 25.331);
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
@@ -1554,6 +1553,9 @@
   .mb-5 {
     margin-bottom: calc(var(--spacing) * 5);
   }
+  .mb-6 {
+    margin-bottom: calc(var(--spacing) * 6);
+  }
   .mb-\[0px\] {
     margin-bottom: 0px;
   }
@@ -1638,6 +1640,18 @@
   .h-6 {
     height: calc(var(--spacing) * 6);
   }
+  .h-10 {
+    height: calc(var(--spacing) * 10);
+  }
+  .h-20 {
+    height: calc(var(--spacing) * 20);
+  }
+  .h-24 {
+    height: calc(var(--spacing) * 24);
+  }
+  .h-\[20\] {
+    height: 20;
+  }
   .h-\[20px\] {
     height: 20px;
   }
@@ -1676,6 +1690,15 @@
   }
   .min-h-\[75px\] {
     min-height: 75px;
+  }
+  .min-h-\[200px\] {
+    min-height: 200px;
+  }
+  .min-h-\[220px\] {
+    min-height: 220px;
+  }
+  .min-h-\[300px\] {
+    min-height: 300px;
   }
   .loading-xl {
     @layer daisyui.l1.l2 {
@@ -1721,6 +1744,15 @@
   .min-w-\[45px\] {
     min-width: 45px;
   }
+  .min-w-\[200px\] {
+    min-width: 200px;
+  }
+  .min-w-\[220px\] {
+    min-width: 220px;
+  }
+  .min-w-\[300px\] {
+    min-width: 300px;
+  }
   .flex-1 {
     flex: 1;
   }
@@ -1741,12 +1773,11 @@
     --tw-translate-y: -150%;
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
-  .translate-y-\[100\%\] {
-    --tw-translate-y: 100%;
-    translate: var(--tw-translate-x) var(--tw-translate-y);
-  }
   .scale-\[2\] {
     scale: 2;
+  }
+  .scale-\[3\] {
+    scale: 3;
   }
   .transform {
     transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
@@ -1766,12 +1797,6 @@
         animation: skeleton 1.8s ease-in-out infinite;
       }
     }
-  }
-  .animate-bounce {
-    animation: var(--animate-bounce);
-  }
-  .animate-ping {
-    animation: var(--animate-ping);
   }
   .animate-pulse {
     animation: var(--animate-pulse);
@@ -1868,6 +1893,9 @@
   .rounded-\[6px\] {
     border-radius: 6px;
   }
+  .rounded-\[12px\] {
+    border-radius: 12px;
+  }
   .rounded-\[20px\] {
     border-radius: 20px;
   }
@@ -1915,6 +1943,12 @@
   .bg-base-200 {
     background-color: var(--color-base-200);
   }
+  .bg-base-300 {
+    background-color: var(--color-base-300);
+  }
+  .bg-base-content {
+    background-color: var(--color-base-content);
+  }
   .bg-success {
     background-color: var(--color-success);
   }
@@ -1931,6 +1965,9 @@
   }
   .stroke-current {
     stroke: currentcolor;
+  }
+  .p-4 {
+    padding: calc(var(--spacing) * 4);
   }
   .p-\[-10px\] {
     padding: -10px;

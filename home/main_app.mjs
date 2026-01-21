@@ -11,6 +11,7 @@ if(isLogined()==true) {
     document.querySelector(".js-login-btn").classList.add("flex");
     document.getElementById("main_box_container").classList.remove("mb-[50px]","sm:mb-[65px]");
     document.getElementById("main_box_container").classList.add("mb-[0px]","sm:mb-[0px]");
+    localStorage.removeItem("userProfile");
 }
 }
 
