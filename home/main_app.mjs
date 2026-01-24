@@ -35,7 +35,7 @@ function skeletonUI (bool=true,limit=10) {
 mainRequest();
 function mainRequest() {
 skeletonUI(true,apiLimit);
-fetch(`https://json-api.uz/api/project/fn44-amaliyot/cars?=${apiLimit}`)
+fetch(`https://json-api.uz/api/project/fn44-amaliyot/cars?limit=${apiLimit}`)
 .then(res=>res.text())
 .then(res=>{
     if(res!="Iltimos domainlar ro'yxatiga ushbu manzilni qo'shing") {

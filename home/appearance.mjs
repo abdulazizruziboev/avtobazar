@@ -31,6 +31,8 @@ document.querySelector(".js-theme-toggler").addEventListener("click",()=>{
     }
 });
 
+window.addEventListener("storage",evt=>console.log(evt))
+
 setTimeout(()=>{
     document.querySelector(".js-main-loader").classList.add("opacity-[0]");
     document.querySelector(".js-main-loader").classList.add("translate-y-[-100%]");
@@ -40,3 +42,4 @@ setTimeout(()=>{
     document.querySelector(".js-main-loader").classList.remove("flex");
     document.querySelector(".js-main-loader").classList.add("hidden");
 },5000)
+ 
